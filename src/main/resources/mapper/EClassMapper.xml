@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.EClassMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.EClass">
+        <id column="ID" property="id" />
+        <result column="REVISION" property="revision" />
+        <result column="CREATED_BY" property="createdBy" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_BY" property="updatedBy" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="IS_DELETE" property="isDelete" />
+        <result column="class_name" property="className" />
+        <result column="master_teacher_id" property="masterTeacherId" />
+        <result column="garde_id" property="gardeId" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, IS_DELETE, ID, class_name, master_teacher_id, garde_id, remark
+    </sql>
+
+</mapper>

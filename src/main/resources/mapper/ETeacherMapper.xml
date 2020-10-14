@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ETeacherMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.ETeacher">
+        <id column="ID" property="id" />
+        <result column="REVISION" property="revision" />
+        <result column="CREATED_BY" property="createdBy" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_BY" property="updatedBy" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="IS_DELETE" property="isDelete" />
+        <result column="teach_name" property="teachName" />
+        <result column="entry_time" property="entryTime" />
+        <result column="salary" property="salary" />
+        <result column="subject_id" property="subjectId" />
+        <result column="birth_date" property="birthDate" />
+        <result column="id_card" property="idCard" />
+        <result column="tel_no" property="telNo" />
+        <result column="work_year" property="workYear" />
+        <result column="is_retire" property="isRetire" />
+        <result column="is_single" property="isSingle" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, IS_DELETE, ID, teach_name, entry_time, salary, subject_id, birth_date, id_card, tel_no, work_year, is_retire, is_single, remark
+    </sql>
+
+</mapper>

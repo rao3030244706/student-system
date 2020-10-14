@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.EStudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.EStudent">
+        <id column="ID" property="id"/>
+        <result column="REVISION" property="revision"/>
+        <result column="CREATED_BY" property="createdBy"/>
+        <result column="CREATED_TIME" property="createdTime"/>
+        <result column="UPDATED_BY" property="updatedBy"/>
+        <result column="UPDATED_TIME" property="updatedTime"/>
+        <result column="IS_DELETE" property="isDelete"/>
+        <result column="cn_name" property="cnName"/>
+        <result column="en_name" property="enName"/>
+        <result column="birth_date" property="birthDate"/>
+        <result column="id_card" property="idCard"/>
+        <result column="province_name" property="provinceName"/>
+        <result column="city_name" property="cityName"/>
+        <result column="sex" property="sex"/>
+        <result column="position" property="position"/>
+        <result column="is_party_member" property="isPartyMember"/>
+        <result column="is_league_member" property="isLeagueMember"/>
+        <result column="grade" property="grade"/>
+        <result column="clazz" property="clazz"/>
+        <result column="is_repeater" property="isRepeater"/>
+        <result column="is_graduation" property="isGraduation"/>
+        <result column="is_school_chioce_student" property="isSchoolChioceStudent"/>
+        <result column="is_punishment" property="isPunishment"/>
+        <result column="tel_no" property="telNo"/>
+        <result column="wechat_no" property="wechatNo"/>
+        <result column="qq_no" property="qqNo"/>
+        <result column="father_name" property="fatherName"/>
+        <result column="mother_name" property="motherName"/>
+        <result column="father_occupation" property="fatherOccupation"/>
+        <result column="father_tel_no" property="fatherTelNo"/>
+        <result column="mother_tel_no" property="motherTelNo"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, IS_DELETE, ID, cn_name, en_name, birth_date, id_card, province_name, city_name, sex, position, is_party_member, is_league_member, grade, clazz, is_repeater, is_graduation, is_school_chioce_student, is_punishment, tel_no, wechat_no, qq_no, father_name, mother_name, father_occupation, father_tel_no, mother_tel_no, remark
+    </sql>
+    <!--批量插入-->
+    <insert id="insertList" parameterType="list">
+        insert into e_student
+        (revision, created_by, created_time, updated_by, updated_time, is_delete, id, cn_name, en_name, birth_date,
+        id_card, province_name, city_name, sex, position, is_party_member, is_league_member, grade, clazz, is_repeater,
+        is_graduation, is_school_chioce_student, is_punishment, tel_no, wechat_no, qq_no, father_name, mother_name,
+        father_occupation, father_tel_no, mother_tel_no, remark)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.revision},#{item.createdBy},#{item.createdTime},#{item.updatedBy},#{item.updatedTime},
+            #{item.isDelete},#{item.id},#{item.cnName},#{item.enName},#{item.birthDate},#{item.idCard},
+            #{item.provinceName},#{item.cityName},#{item.sex},#{item.position},#{item.isPartyMember},
+            #{item.isLeagueMember},#{item.grade},#{item.clazz},#{item.isRepeater},#{item.isGraduation},
+            #{item.isSchoolChioceStudent},#{item.isPunishment},#{item.telNo},#{item.wechatNo},#{item.qqNo},
+            #{item.fatherName},#{item.motherName},#{item.fatherOccupation},#{item.fatherTelNo},#{item.motherTelNo},
+            #{item.remark})
+        </foreach>
+    </insert>
+
+    <!--<insert id="insertOne" parameterType="com.example.demo.entity.EStudent">
+        insert into e_student (REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, IS_DELETE, ID, cn_name,
+                               en_name, birth_date, id_card, province_name, city_name, sex, position, is_party_member,
+                               is_league_member, grade, clazz, is_repeater, is_graduation, is_school_chioce_student,
+                               is_punishment, tel_no, wechat_no, qq_no, father_name, mother_name, father_occupation,
+                               father_tel_no, mother_tel_no, remark)
+        values (#{revision}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime}, #{isDelete}, #{id}, #{cnName},
+                #{enName}, #{birthDate}, #{idCard}, #{provinceName}, #{cityName}, #{sex}, #{position},
+                #{isPartyMember}, #{isLeagueMember}, #{grade}, #{clazz}, #{isRepeater}, #{isGraduation},
+                #{isSchoolChioceStudent}, #{isPunishment}, #{telNo}, #{wechatNo}, #{qqNo}, #{fatherName},
+                #{motherName}, #{fatherOccupation}, #{fatherTelNo}, #{motherTelNo}, #{remark})
+    </insert>-->
+</mapper>
