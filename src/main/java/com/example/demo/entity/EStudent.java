@@ -96,8 +96,22 @@ public class EStudent implements Serializable {
     @ApiModelProperty(value = "省份")
     private String provinceName;
 
+
+    /*provinceName-->上海*/
+    public interface JiangSu {
+    }
+
+    /*provinceName-->四川*/
+    public interface SiChuan {
+    }
+
+    //todo 当provinceName为四川时，cityName必须是成都 \u6210\u90fd  使用jdk的bin的native2ascii.exe
+    //todo 敲cmd 再敲native2ascii.exe 鼠标标记+右点
+    //todo  当provinceName为江苏时，cityName必须是南京 \u5357\u4eac
     @ExcelExport
-    @NotBlank(groups = Add.class)
+    @NotNull(groups = Add.class)
+    @Pattern(regexp = "\\u6210\\u90fd", groups = SiChuan.class)
+    @Pattern(regexp = "\\u5357\\u4eac", groups = JiangSu.class)
     @ApiModelProperty(value = "市")
     private String cityName;
 
