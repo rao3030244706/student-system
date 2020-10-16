@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 import com.example.demo.annotation.ExcelExport;
-import com.example.demo.myValidated.group.Add;
-import com.example.demo.myValidated.group.Delete;
-import com.example.demo.myValidated.group.Update;
+import com.example.demo.validation.group.Add;
+import com.example.demo.validation.group.Delete;
+import com.example.demo.validation.group.Update;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
 
 /**
  * <p>
@@ -86,6 +87,7 @@ public class EStudent implements Serializable {
 
 
     @NotBlank(groups = Add.class)
+    @Pattern(regexp = "^362502.*")
     @ApiModelProperty(value = "身份证")
     private String idCard;
 

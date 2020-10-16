@@ -1,4 +1,4 @@
-package com.example.demo.myValidated.group;
+package com.example.demo.validation.group;
 
 
 /**

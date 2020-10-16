@@ -1,13 +1,13 @@
-package com.example.demo.myValidated.myselfValied;
+package com.example.demo.validation.validator;
 
+import com.example.demo.validation.MustIsExcel;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import javax.validation.constraints.NotNull;
 
 //@NotNull
-public class MustIsExcelAnnoHandler implements ConstraintValidator<MustIsExcel, MultipartFile> {
+public class MustIsExcelValidator implements ConstraintValidator<MustIsExcel, MultipartFile> {
 
     @Override
     public void initialize(MustIsExcel constraintAnnotation) {

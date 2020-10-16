@@ -1,6 +1,7 @@
 package com.example.demo.advice;
 
 
+import com.example.demo.exception.ListValidException;
 import com.example.demo.exception.ManageException;
 import com.example.demo.pojo.CommonResponseVO;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Path;
+import javax.validation.ValidationException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -31,6 +34,12 @@ public class ControllerExceptionAdvice {
         return CommonResponseVO.fail(e.getStatus(), e.getMsg(), null);
     }
 
+    /**
+     * 系统异常
+     *
+     * @param e
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     public CommonResponseVO commonExceptionHandler(Exception e) {
         e.printStackTrace();
@@ -46,6 +55,18 @@ public class ControllerExceptionAdvice {
                 collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
         return CommonResponseVO.fail(collect);
     }
+
+    @ExceptionHandler
+    public CommonResponseVO exceptionHandler(ValidationException e) {
+        Map<Integer, Map<Path, String>> map = new HashMap<>();
+
+        ((ListValidException) e.getCause()).getErrors().forEach((integer, constraintViolations) -> {
+            map.put(integer, constraintViolations.stream()
+                    .collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage)));
+        });
+        return CommonResponseVO.fail(map);
+    }
+
 
     /**
      * 拦截的是@RequestBody传递的参数

@@ -1,8 +1,9 @@
-package com.example.demo.myValidated.myselfValied;
+package com.example.demo.validation;
+
+import com.example.demo.validation.validator.MustIsExcelValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.constraints.NotNull;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -14,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {MustIsExcelAnnoHandler.class})
+@Constraint(validatedBy = {MustIsExcelValidator.class})
 public @interface MustIsExcel {
     String message() default "{上传的文件类型必须是Excel}";
 

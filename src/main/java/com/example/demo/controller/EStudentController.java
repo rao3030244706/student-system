@@ -2,13 +2,14 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.EStudent;
-import com.example.demo.myValidated.myselfValied.MustIsExcel;
+import com.example.demo.excel.create.CreateExcelUtils;
+import com.example.demo.validation.MustIsExcel;
 import com.example.demo.pojo.CommonResponseVO;
 import com.example.demo.pojo.StudentVO;
 import com.example.demo.service.IEStudentService;
-import com.example.demo.myValidated.group.Add;
-import com.example.demo.myValidated.group.Query;
-import com.example.demo.myValidated.group.Update;
+import com.example.demo.validation.group.Add;
+import com.example.demo.validation.group.Query;
+import com.example.demo.validation.group.Update;
 //import com.example.demo.excel.parse.ParseExcelOneThreadUtils;
 import com.example.demo.excel.parse.ParseExcelOneThreadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -57,6 +56,7 @@ public class EStudentController {
         return CommonResponseVO.SUCCESS;
     }
 
+
     /**
      * 解析传递的Excel文件，加入到数据库中
      * todo 使用upload.html去上传
@@ -67,6 +67,7 @@ public class EStudentController {
      */
     @RequestMapping(value = "/addStudents", method = RequestMethod.POST)
     public CommonResponseVO addStudents(@MustIsExcel @RequestParam(name = "fileUpload") MultipartFile file) {
+        //使用fork-join or one thread 看情况，看数量
         List<Object> objects = ParseExcelOneThreadUtils.parseExcelFile(file, EStudent.class);
         studentService.insertListByExcel(objects);//>0 success <0 fail 后面再改
         return CommonResponseVO.SUCCESS;
@@ -84,5 +85,16 @@ public class EStudentController {
         return CommonResponseVO.SUCCESS;
     }
 
+    /**
+     * 导出学生excel
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/exportStudentExcel")
+    public CommonResponseVO exportStudentExcel(/*@NotNull Integer stuId*/) throws Exception {
+        CreateExcelUtils.createEntityExcel(null,EStudent.class,10);
+        return CommonResponseVO.SUCCESS;
+    }
 
 }
