@@ -11,11 +11,13 @@ import com.example.demo.annotation.ExcelExport;
 import com.example.demo.validation.group.Add;
 import com.example.demo.validation.group.Delete;
 import com.example.demo.validation.group.Update;
+import com.example.demo.validation.sequenceProvider.EStudentDynamicGroupSequenceProvider;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.group.GroupSequenceProvider;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -35,6 +37,7 @@ import javax.validation.constraints.Pattern;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "EStudent对象", description = "学生信息表")
+@GroupSequenceProvider(EStudentDynamicGroupSequenceProvider.class)
 public class EStudent implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -105,8 +108,10 @@ public class EStudent implements Serializable {
     public interface SiChuan {
     }
 
-    //todo 当provinceName为四川时，cityName必须是成都 \u6210\u90fd  使用jdk的bin的native2ascii.exe
-    //todo 敲cmd 再敲native2ascii.exe 鼠标标记+右点
+    //在idea的 termianl 获取中文的ascii码-->
+    // c:\Program Files\Java>cd c:\Program Files\Java\jdk1.8.0_251\bin 再敲native2ascii.exe
+    //再敲成都+回车
+    //todo 当provinceName为四川时，cityName必须是成都 \u6210\u90fd
     //todo  当provinceName为江苏时，cityName必须是南京 \u5357\u4eac
     @ExcelExport
     @NotNull(groups = Add.class)

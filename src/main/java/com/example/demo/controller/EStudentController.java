@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -79,6 +80,25 @@ public class EStudentController {
         return CommonResponseVO.SUCCESS;
     }
 
+    /**
+     * todo 测试一下 EStudentDynamicGroupSequenceProvider 是否起作用
+     * todo 看一下EStudentDynamicGroupSequenceProvider会不会影响其他对于EStudent的校验
+     * todo 每一个校验注解都有自己的groups(B)，校验逻辑内部会维护一个组(A) A与B有交集就会触发校验注解的校验逻辑
+     * "grade": "不能为空",
+     * "motherTelNo": "不能为空",
+     * "id": "必须为null",
+     *
+     * @param student
+     * @return
+     * @throws Exception
+     */
+
+    @RequestMapping("/addOneStudent")
+    public CommonResponseVO addOneStudent(@RequestBody @Valid EStudent student) throws Exception {
+        studentService.saveOrUpdateExecutor(student);
+        return CommonResponseVO.SUCCESS;
+    }
+
     @RequestMapping("/deleteStudent")
     public CommonResponseVO deleteStudent(@NotNull Integer stuId) throws Exception {
         studentService.deleteStudent(stuId);
@@ -93,7 +113,7 @@ public class EStudentController {
      */
     @RequestMapping("/exportStudentExcel")
     public CommonResponseVO exportStudentExcel(/*@NotNull Integer stuId*/) throws Exception {
-        CreateExcelUtils.createEntityExcel(null,EStudent.class,10);
+        CreateExcelUtils.createEntityExcel(null, EStudent.class, 10);
         return CommonResponseVO.SUCCESS;
     }
 
