@@ -84,6 +84,7 @@ public class EStudentController {
      * todo 测试一下 EStudentDynamicGroupSequenceProvider 是否起作用
      * todo 看一下EStudentDynamicGroupSequenceProvider会不会影响其他对于EStudent的校验
      * todo 每一个校验注解都有自己的groups(B)，校验逻辑内部会维护一个组(A) A与B有交集就会触发校验注解的校验逻辑
+     * todo DefaultGroupSequenceProvider作用就是在已有的校验组添加新的组
      * "grade": "不能为空",
      * "motherTelNo": "不能为空",
      * "id": "必须为null",

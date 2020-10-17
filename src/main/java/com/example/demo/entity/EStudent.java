@@ -37,6 +37,7 @@ import javax.validation.constraints.Pattern;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "EStudent对象", description = "学生信息表")
+//EStudentDynamicGroupSequenceProvider使这个起效
 @GroupSequenceProvider(EStudentDynamicGroupSequenceProvider.class)
 public class EStudent implements Serializable {
 
@@ -45,7 +46,9 @@ public class EStudent implements Serializable {
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Integer revision;
-
+    //检验一下defaultGroupSequence.add(EStudent.class);的作用
+    //
+    @NotNull(message = "娃哈哈")//groups缺省就是Default
     @ApiModelProperty(value = "创建人")
     @TableField("CREATED_BY")
     private String createdBy;
